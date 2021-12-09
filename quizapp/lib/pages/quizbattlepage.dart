@@ -21,7 +21,7 @@ class _QuizBattleState extends State<QuizBattle> {
   // exam mode have 30 questions.
   Set exammodeQuestions = {};
   List<int> rightAnswers = [];
-  List<int> wronganswerslist = [];
+  Map<int, int> wronganswerslist = {};
   int tileclicked = 6;
   // study mode
   int currentQsn = 1;
@@ -155,10 +155,12 @@ class _QuizBattleState extends State<QuizBattle> {
                               if (widget.isexammode) {
                                 if (tileclicked != 6) {
                                   if (correctAns == tileclicked) {
-                                    rightAnswers.add(currentQsn);
+                                    rightAnswers.add(currentQsn - 1);
                                   } else {
-                                    wronganswerslist.add(currentQsn);
+                                    wronganswerslist
+                                        .addAll({currentQsn - 1: tileclicked});
                                   }
+
                                   tileclicked = 6;
                                   currentQsn += 1;
                                 } else {
@@ -172,7 +174,17 @@ class _QuizBattleState extends State<QuizBattle> {
                               }
                             });
                           } else {
-                            if (widget.isexammode) {
+                            if (tileclicked != 6) {
+                              if (correctAns == tileclicked) {
+                                rightAnswers.add(currentQsn - 1);
+                              } else {
+                                wronganswerslist
+                                    .addAll({currentQsn - 1: tileclicked});
+                              }
+                            } else if (widget.isexammode) {
+                              chooseAanswer(context);
+                            }
+                            if (widget.isexammode && tileclicked != 6) {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -180,7 +192,7 @@ class _QuizBattleState extends State<QuizBattle> {
                                           widget.questionbank,
                                           rightAnswers,
                                           wronganswerslist)));
-                            } else {
+                            } else if (!widget.isexammode) {
                               dialogBox(context, () {
                                 setState(() {
                                   currentQsn = 1;

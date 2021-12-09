@@ -6,7 +6,7 @@ import 'package:quizapp/palette/styles.dart';
 class ResultPage extends StatefulWidget {
   List question;
   List rightAnswers;
-  List wronganswer;
+  Map<int, int> wronganswer;
 
   ResultPage(this.question, this.rightAnswers, this.wronganswer, {Key? key})
       : super(key: key);
@@ -139,8 +139,10 @@ class _ResultPageState extends State<ResultPage> {
           : ListView.builder(
               itemCount: widget.wronganswer.length, //question.length,
               itemBuilder: (context, index) {
-                return wronganswer(
-                    widget.wronganswer[index], (index + 1).toString());
+                int indexs = widget.wronganswer.keys.elementAt(index);
+                int selected = widget.wronganswer.values.elementAt(index);
+                return wronganswer(indexs, (index + 1).toString(),
+                    selected: selected);
               }),
     );
   }
@@ -172,11 +174,15 @@ class _ResultPageState extends State<ResultPage> {
     );
   }
 
-  Widget wronganswer(int index, String num) {
+  Widget wronganswer(int index, String num, {int selected = 200}) {
     var question = widget.question[index].keys.elementAt(0);
-    //String answer = question[];
     int answerindex = int.parse(widget.question[index]['answers']) - 1;
     String answer = (widget.question[index][question])[answerindex];
+    String? useranswer;
+
+    if (selected != 200) {
+      useranswer = (widget.question[index][question])[selected];
+    }
 
     return Padding(
       padding: EdgeInsets.only(top: 10.h),
@@ -204,18 +210,34 @@ class _ResultPageState extends State<ResultPage> {
                   ),
                 ],
               ),
+              selected != 200
+                  ? Text(
+                      '                            Your answer',
+                      style: TextStyle(
+                          color: Colors.black45,
+                          fontSize: 17.sp,
+                          fontWeight: FontWeight.bold),
+                    )
+                  : const SizedBox(),
+              selected != 200
+                  ? SizedBox(
+                      child: Text(
+                      useranswer!,
+                      style: TextStyle(color: Colors.red, fontSize: 20.sp),
+                    ))
+                  : SizedBox(),
               Text(
                 '                            Correct answer',
                 style: TextStyle(
-                    color: Colors.green,
+                    color: Colors.black45,
                     fontSize: 17.sp,
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(
                   child: Text(
                 answer,
-                style: TextStyle(color: Colors.black45, fontSize: 20.sp),
-              ))
+                style: TextStyle(color: Colors.green, fontSize: 20.sp),
+              )),
             ],
           )),
     );
