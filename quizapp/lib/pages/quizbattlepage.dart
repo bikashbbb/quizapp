@@ -58,160 +58,165 @@ class _QuizBattleState extends State<QuizBattle> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Stack(
-          children: [
-            SizedBox(
-              width: 360.w,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  StepProgressIndicator(
-                    totalSteps: totalquestions,
-                    currentStep: currentQsn,
-                    selectedColor: Colors.black,
-                    unselectedColor: Colors.grey.shade300,
-                  ),
-                  Divider(
-                    height: 25.h,
-                    color: Colors.white,
-                  ),
-                  // question number,
-                  Text(
-                    'Question $currentQsn/$totalquestions'.toString(),
-                    style: TextStyle(color: Colors.black, fontSize: 30.sp),
-                  ),
-                  const Divider(
-                    color: Colors.black,
-                    thickness: 1,
-                  ),
-                  // question here
-                  Text(
-                    question,
-                    style: TextStyle(
-                        color: Colors.black87,
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 50.h,
-                  ),
-                  // asnwers
-                  answerTile(question, 0),
-                  answerTile(question, 1),
-                  answerTile(question, 2),
-                  answerTile(question, 3),
-                ],
-              ),
-            ),
-            Positioned(
-              top: 600.h,
-              left: 0,
-              right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  widget.isexammode
-                      ? const SizedBox()
-                      : Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: TextButton(
-                              style: TextButton.styleFrom(
-                                primary: Colors.white,
-                                shape: const BeveledRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(0))),
-                                backgroundColor: Colors.grey[600],
-                                onSurface: Colors.grey,
-                                padding: const EdgeInsets.all(20),
-                              ),
-                              onPressed: () {
-                                if (currentQsn > 1) {
-                                  currentQsn -= 1;
-                                  setState(() {});
-                                }
-                              },
-                              child: const Text("  ATRÁS  ",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontFamily: "Bahnschrift",
-                                    fontWeight: FontWeight.w700,
-                                  ))),
-                        ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: TextButton(
-                        style: TextButton.styleFrom(
-                          primary: Colors.white,
-                          shape: const BeveledRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(0))),
-                          backgroundColor: Colors.red[600],
-                          onSurface: Colors.grey,
-                          padding: const EdgeInsets.all(20),
-                        ),
-                        onPressed: () {
-                          if (currentQsn < totalquestions) {
-                            setState(() {
-                              if (widget.isexammode) {
-                                if (tileclicked != 6) {
-                                  if (correctAns == tileclicked) {
-                                    rightAnswers.add(currentQsn - 1);
-                                  } else {
-                                    wronganswerslist
-                                        .addAll({currentQsn - 1: tileclicked});
-                                  }
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Stack(
+            children: [
+              SizedBox(
+                width: 360.w,
+                height: 600.h,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    StepProgressIndicator(
+                      totalSteps: totalquestions,
+                      currentStep: currentQsn,
+                      selectedColor: Colors.black,
+                      unselectedColor: Colors.grey.shade300,
+                    ),
+                    Divider(
+                      height: 25.h,
+                      color: Colors.white,
+                    ),
+                    // question number,
+                    Text(
+                      'Question $currentQsn/$totalquestions'.toString(),
+                      style: TextStyle(color: Colors.black, fontSize: 30.sp),
+                    ),
+                    const Divider(
+                      color: Colors.black,
+                      thickness: 1,
+                    ),
+                    // question here
+                    Text(
+                      question,
+                      style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 50.h,
+                    ),
+                    // asnwers
 
+                    answerTile(question, 0),
+                    answerTile(question, 1),
+                    answerTile(question, 2),
+                    answerTile(question, 3),
+                  ],
+                ),
+              ),
+              Positioned(
+                bottom: 70.h,
+                left: 0,
+                right: 0,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    widget.isexammode
+                        ? const SizedBox()
+                        : Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: TextButton(
+                                style: TextButton.styleFrom(
+                                  primary: Colors.white,
+                                  shape: const BeveledRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(0))),
+                                  backgroundColor: Colors.grey[600],
+                                  onSurface: Colors.grey,
+                                  padding: const EdgeInsets.all(20),
+                                ),
+                                onPressed: () {
+                                  if (currentQsn > 1) {
+                                    currentQsn -= 1;
+                                    setState(() {});
+                                  }
+                                },
+                                child: const Text("  ATRÁS  ",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontFamily: "Bahnschrift",
+                                      fontWeight: FontWeight.w700,
+                                    ))),
+                          ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: TextButton(
+                          style: TextButton.styleFrom(
+                            primary: Colors.white,
+                            shape: const BeveledRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(0))),
+                            backgroundColor: Colors.red[600],
+                            onSurface: Colors.grey,
+                            padding: const EdgeInsets.all(20),
+                          ),
+                          onPressed: () {
+                            if (currentQsn < totalquestions) {
+                              setState(() {
+                                if (widget.isexammode) {
+                                  if (tileclicked != 6) {
+                                    if (correctAns == tileclicked) {
+                                      rightAnswers.add(currentQsn - 1);
+                                    } else {
+                                      wronganswerslist.addAll(
+                                          {currentQsn - 1: tileclicked});
+                                    }
+
+                                    tileclicked = 6;
+                                    currentQsn += 1;
+                                  } else {
+                                    chooseAanswer(context);
+                                  }
+                                } else {
                                   tileclicked = 6;
                                   currentQsn += 1;
-                                } else {
-                                  chooseAanswer(context);
+                                  correctAns = wronganswer = 20;
+                                  istapped = false;
                                 }
-                              } else {
-                                tileclicked = 6;
-                                currentQsn += 1;
-                                correctAns = wronganswer = 20;
-                                istapped = false;
-                              }
-                            });
-                          } else {
-                            if (tileclicked != 6) {
-                              if (correctAns == tileclicked) {
-                                rightAnswers.add(currentQsn - 1);
-                              } else {
-                                wronganswerslist
-                                    .addAll({currentQsn - 1: tileclicked});
-                              }
-                            } else if (widget.isexammode) {
-                              chooseAanswer(context);
-                            }
-                            if (widget.isexammode && tileclicked != 6) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (builder) => ResultPage(
-                                          widget.questionbank,
-                                          rightAnswers,
-                                          wronganswerslist)));
-                            } else if (!widget.isexammode) {
-                              dialogBox(context, () {
-                                setState(() {
-                                  currentQsn = 1;
-                                });
                               });
+                            } else {
+                              if (tileclicked != 6) {
+                                if (correctAns == tileclicked) {
+                                  rightAnswers.add(currentQsn - 1);
+                                } else {
+                                  wronganswerslist
+                                      .addAll({currentQsn - 1: tileclicked});
+                                }
+                              } else if (widget.isexammode) {
+                                chooseAanswer(context);
+                              }
+                              if (widget.isexammode && tileclicked != 6) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (builder) => ResultPage(
+                                            widget.questionbank,
+                                            rightAnswers,
+                                            wronganswerslist)));
+                              } else if (!widget.isexammode) {
+                                dialogBox(context, () {
+                                  setState(() {
+                                    currentQsn = 1;
+                                  });
+                                });
+                              }
                             }
-                          }
-                        },
-                        child: const Text("SIGUIENTE",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: "Bahnschrift",
-                              fontWeight: FontWeight.w700,
-                            ))),
-                  ),
-                ],
-              ),
-            )
-          ],
+                          },
+                          child: const Text("SIGUIENTE",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: "Bahnschrift",
+                                fontWeight: FontWeight.w700,
+                              ))),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -236,52 +241,72 @@ class _QuizBattleState extends State<QuizBattle> {
           correctAns =
               int.parse(widget.questionbank[currentQsn - 1]['answers']) - 1;
           if (qsnNo == correctAns && istapped) {
-            return Material(
-              elevation: 3,
-              child: AnimatedContainer(
-                alignment: Alignment.centerLeft,
-                color: Colors.green,
-                duration: const Duration(milliseconds: 300),
-                width: 360.w,
-                child: Text(
-                  widget.questionbank[currentQsn - 1][question][qsnNo],
-                  style: TextStyle(
-                    fontSize: 18.sp,
+            return ConstrainedBox(
+              constraints: BoxConstraints(minHeight: 60.h),
+              child: Material(
+                elevation: 3,
+                child: AnimatedContainer(
+                  alignment: Alignment.centerLeft,
+                  color: Colors.green,
+                  duration: const Duration(milliseconds: 300),
+                  width: 360.w,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 5.w),
+                    child: Text(
+                      widget.questionbank[currentQsn - 1][question][qsnNo],
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                      ),
+                    ),
                   ),
                 ),
               ),
             );
           } else if (qsnNo == wronganswer && istapped) {
-            return Material(
-              elevation: 3,
-              child: AnimatedContainer(
-                alignment: Alignment.centerLeft,
-                color: Colors.red[300],
-                duration: const Duration(milliseconds: 300),
-                width: 360.w,
-                child: Text(
-                  widget.questionbank[currentQsn - 1][question][qsnNo],
-                  style: TextStyle(
-                    fontSize: 18.sp,
+            return ConstrainedBox(
+              constraints: BoxConstraints(minHeight: 60.h),
+              child: Material(
+                elevation: 3,
+                child: AnimatedContainer(
+                  alignment: Alignment.centerLeft,
+                  color: Colors.red[300],
+                  duration: const Duration(milliseconds: 300),
+                  width: 360.w,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 5.w),
+                    child: Text(
+                      widget.questionbank[currentQsn - 1][question][qsnNo],
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                      ),
+                    ),
                   ),
                 ),
               ),
             );
           } else {
-            return Material(
-              elevation: 3,
-              child: AnimatedContainer(
-                alignment: Alignment.centerLeft,
-                color: tileclicked == qsnNo ? Colors.brown[100] : Colors.white,
-                duration: const Duration(milliseconds: 300),
-                width: 360.w,
-                child: Text(
-                  widget.isexammode
-                      ? widget.questionbank[exammodeQuestions
-                          .elementAt(currentQsn - 1)][question][qsnNo]
-                      : widget.questionbank[currentQsn - 1][question][qsnNo],
-                  style: TextStyle(
-                    fontSize: 18.sp,
+            return ConstrainedBox(
+              constraints: BoxConstraints(minHeight: 60.h),
+              child: Material(
+                elevation: 3,
+                child: AnimatedContainer(
+                  alignment: Alignment.centerLeft,
+                  color:
+                      tileclicked == qsnNo ? Colors.brown[100] : Colors.white,
+                  duration: const Duration(milliseconds: 300),
+                  width: 360.w,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 5.w),
+                    child: Text(
+                      widget.isexammode
+                          ? widget.questionbank[exammodeQuestions
+                              .elementAt(currentQsn - 1)][question][qsnNo]
+                          : widget.questionbank[currentQsn - 1][question]
+                              [qsnNo],
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                      ),
+                    ),
                   ),
                 ),
               ),
