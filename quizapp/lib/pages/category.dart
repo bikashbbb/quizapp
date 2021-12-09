@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:quizapp/data/category.dart';
 import 'package:quizapp/pages/choosemodes.dart';
-import 'package:quizapp/pages/quizbattlepage.dart';
 import 'package:quizapp/palette/styles.dart';
 import 'package:quizapp/questionbank/questions_ebusiness.dart';
 
@@ -47,7 +46,7 @@ class CategoryPage extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                  height: 600.h,
+                  height: 620.h,
                   child: phasesBuilder(fase2, fase2Ects, 3, context)),
               Padding(
                 padding: EdgeInsets.only(left: 40.w, top: 20.h),
@@ -101,7 +100,7 @@ class CategoryPage extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => SubjectPageECONOMIA(
                         'FASEI',
-                        'FUNDAMENTOS DE ' + phase[index],
+                        phaseslongname[phase[index]],
                         ects[index],
                         fasei[index])));
           } else if (whchpase == 2) {
@@ -110,7 +109,7 @@ class CategoryPage extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => SubjectPageECONOMIA(
                         'FASEII',
-                        'FUNDAMENTOS DE ' + phase[index],
+                        phaseslongname[phase[index]],
                         ects[index],
                         faseii[index])));
           } else {
@@ -119,7 +118,7 @@ class CategoryPage extends StatelessWidget {
                 MaterialPageRoute(
                     builder: (context) => SubjectPageECONOMIA(
                         'FASEIII',
-                        'FUNDAMENTOS DE ' + phase[index],
+                        phaseslongname[phase[index]],
                         ects[index],
                         faseiii[index])));
           }
