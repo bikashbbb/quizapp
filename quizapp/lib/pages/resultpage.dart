@@ -17,6 +17,7 @@ class ResultPage extends StatefulWidget {
 
 class _ResultPageState extends State<ResultPage> {
   bool iscorrectans = true;
+
   @override
   Widget build(BuildContext context) {
     int totalrightanswers = widget.rightAnswers.length;
@@ -131,13 +132,13 @@ class _ResultPageState extends State<ResultPage> {
       width: 382.w,
       child: iscorrectans
           ? ListView.builder(
-              itemCount: widget.rightAnswers.length, //question.length,
+              itemCount: widget.rightAnswers.length,
               itemBuilder: (context, index) {
                 return wronganswer(
                     widget.rightAnswers[index], (index + 1).toString());
               })
           : ListView.builder(
-              itemCount: widget.wronganswer.length, //question.length,
+              itemCount: widget.wronganswer.length,
               itemBuilder: (context, index) {
                 int indexs = widget.wronganswer.keys.elementAt(index);
                 int selected = widget.wronganswer.values.elementAt(index);
@@ -225,7 +226,7 @@ class _ResultPageState extends State<ResultPage> {
                       useranswer!,
                       style: TextStyle(color: Colors.red, fontSize: 20.sp),
                     ))
-                  : SizedBox(),
+                  : const SizedBox(),
               Text(
                 '                            Correct answer',
                 style: TextStyle(

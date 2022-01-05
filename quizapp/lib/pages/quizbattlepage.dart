@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,6 +44,11 @@ class _QuizBattleState extends State<QuizBattle> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     int totalquestions = widget.isexammode
         ? exammodeQuestions.length
@@ -51,7 +57,6 @@ class _QuizBattleState extends State<QuizBattle> {
         ? widget.questionbank[exammodeQuestions.elementAt(currentQsn - 1)].keys
             .elementAt(0)
         : widget.questionbank[currentQsn - 1].keys.elementAt(0);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -159,10 +164,13 @@ class _QuizBattleState extends State<QuizBattle> {
                                 if (widget.isexammode) {
                                   if (tileclicked != 6) {
                                     if (correctAns == tileclicked) {
-                                      rightAnswers.add(currentQsn - 1);
+                                      rightAnswers.add(exammodeQuestions
+                                          .elementAt(currentQsn - 1));
                                     } else {
-                                      wronganswerslist.addAll(
-                                          {currentQsn - 1: tileclicked});
+                                      wronganswerslist.addAll({
+                                        exammodeQuestions.elementAt(
+                                            currentQsn - 1): tileclicked
+                                      });
                                     }
 
                                     tileclicked = 6;
@@ -180,10 +188,13 @@ class _QuizBattleState extends State<QuizBattle> {
                             } else {
                               if (tileclicked != 6) {
                                 if (correctAns == tileclicked) {
-                                  rightAnswers.add(currentQsn - 1);
+                                  rightAnswers.add(exammodeQuestions
+                                      .elementAt(currentQsn - 1));
                                 } else {
-                                  wronganswerslist
-                                      .addAll({currentQsn - 1: tileclicked});
+                                  wronganswerslist.addAll({
+                                    exammodeQuestions.elementAt(currentQsn - 1):
+                                        tileclicked
+                                  });
                                 }
                               } else if (widget.isexammode) {
                                 chooseAanswer(context);
